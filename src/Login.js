@@ -1,7 +1,11 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { GoogleLogin } from 'react-google-login';
 
+
+
 function Login() {
+  const navigate = useNavigate();
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [emailError, setEmailError] = useState('');
@@ -30,7 +34,8 @@ function Login() {
 
     // Perform other actions if the form is valid
     if (email && password) {
-      // Perform the desired actions upon form submission
+      // Assuming successful authentication, navigate to the profile page
+      navigate('/profile');
     }
   };
 
@@ -43,6 +48,10 @@ function Login() {
   const handleGoogleSignInFailure = (error) => {
     // Handle Google sign-in failure
     console.error('Google sign-in error:', error);
+  };
+
+  const switchToSignup = () => {
+    navigate('/signup');
   };
 
   return (
@@ -73,9 +82,9 @@ function Login() {
             {passwordError && <p className="text-danger">{passwordError}</p>}
           </div>
           <div className="d-grid">
-            <button className="btn btn-primary" onClick={switchtoProfile}>Sign In</button>
+            <button className="btn btn-primary" type="submit">Sign In</button>
             <GoogleLogin
-              clientId="YOUR_GOOGLE_CLIENT_ID"
+              clientId="1086850798955-c5hplo269sqk403pnrlob8d8la5fh9l8.apps.googleusercontent.com"
               buttonText="Sign In with Google"
               onSuccess={handleGoogleSignInSuccess}
               onFailure={handleGoogleSignInFailure}
@@ -84,7 +93,7 @@ function Login() {
             />
           </div>
           <p className="text-right">
-            Forgot <a href="">Password</a> | <a href="">Sign Up</a>
+            Forgot <a href="">Password</a> | <a href="#" onClick={switchToSignup}>Sign Up</a>
           </p>
         </form>
       </div>

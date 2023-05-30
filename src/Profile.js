@@ -1,48 +1,39 @@
 import React, { useEffect, useState } from 'react';
 
-return (
-    <div className="login template d-flex justify-content-center align-items-center vh-100 bg-primary">
-      <div className="w-40 p-5 rounded bg-white">
-        <form onSubmit={handleSubmit}>
-          <h3>Sign In</h3>
-          <div className="mb-2">
-            <label htmlFor="email">Email</label>
-            <input
-              type="email"
-              placeholder="Enter your email"
-              className="form-control"
-              value={email}
-              onChange={handleEmailChange}
-            />
-            {emailError && <p className="text-danger">{emailError}</p>}
-          </div>
-          <div className="mb-2">
-            <label htmlFor="password">Password</label>
-            <input
-              type="password"
-              placeholder="Enter your password"
-              className="form-control"
-              value={password}
-              onChange={handlePasswordChange}
-            />
-            {passwordError && <p className="text-danger">{passwordError}</p>}
-          </div>
-          <div className="d-grid">
-            <button className="btn btn-primary" onClick={switchtoProfile}>Sign In</button>
-            <GoogleLogin
-              clientId="YOUR_GOOGLE_CLIENT_ID"
-              buttonText="Sign In with Google"
-              onSuccess={handleGoogleSignInSuccess}
-              onFailure={handleGoogleSignInFailure}
-              cookiePolicy={'single_host_origin'}
-              className="btn btn-danger mt-2"
-            />
-          </div>
-          
-        </form>
-      </div>
+const Profile = () => {
+  const [user, setUser] = useState(null);
+
+  // Simulating data retrieval
+  useEffect(() => {
+    // Replace this with your actual data retrieval logic
+    const fetchUserData = async () => {
+      try {
+        // Simulating an API call to retrieve user data
+        const response = await fetch('api/user');
+        const userData = await response.json();
+        setUser(userData);
+      } catch (error) {
+        console.log('Error fetching user data:', error);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  return (
+    <div className="profile">
+      <h3>Profile</h3>
+      {user ? (
+        <div className="profile-details">
+          <img src={user.profilePicture} alt="Profile Picture" />
+          <p>Full Name: {user.fullName}</p>
+          <p>Email: {user.email}</p>
+        </div>
+      ) : (
+        <p>Loading user data...</p>
+      )}
     </div>
   );
-}
+};
 
-export default Login;
+export default Profile;

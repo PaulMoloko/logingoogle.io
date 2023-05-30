@@ -1,19 +1,19 @@
-// Import necessary dependencies and components
 import React from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import Login from './Login';
-import 'bootstrap/dist/css/bootstrap.min.css';
-import { useHistory } from 'react-router-dom';
+import Signup from './Signup';
 import Profile from './Profile';
+import 'bootstrap/dist/css/bootstrap.min.css';
 
-// Define the main App component
 const App = () => (
   <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Login />} /> {/* Render the Login component for the root path */}
-      <Route exact path="/profile" component={Profile} /> {/* Render the Profile component for the "/profile" path */}
+      <Route path="/" element={<Login />} />
+      <Route path="/signup" element={<Signup />} />
+      <Route path="/login" element={<Login />} /> {/* Add the route for Login.js */}
+      <Route path="/profile" element={<Profile />} />
     </Routes>
   </BrowserRouter>
 );
 
-export default App; // Export the App component as the default export
+export default App;
